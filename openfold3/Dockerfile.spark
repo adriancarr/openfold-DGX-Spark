@@ -93,12 +93,15 @@ RUN git clone https://github.com/NVIDIA/cutlass --branch v3.6.0 --depth 1
 # Clone OpenFold3 source
 RUN git clone https://github.com/aqlaboratory/openfold-3.git
 
-# Install OpenFold3
+# Install OpenFold3 (use --no-deps to prevent PyTorch CPU overwrite)
 WORKDIR /opt/openfold-3
-RUN python3 setup.py install
+RUN pip install --no-deps -e .
 
 # Pre-create triton cache directory
 RUN python3 -c "import os; os.makedirs('/root/.triton/autotune', exist_ok=True)"
+
+# IMPORTANT: Reinstall PyTorch CUDA version to ensure it wasn't overwritten by dependencies
+RUN pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu130 --force-reinstall
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
