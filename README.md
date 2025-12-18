@@ -59,19 +59,13 @@ Benchmarks run on **NVIDIA DGX Spark** (Grace Blackwell GB10, 20 CPU cores, 119G
 
 *Benchmark date: 2025-12-18*
 
-### 1. Multi-Protein Speed (Inference Only)
-| Example | Residues | Inference Time | Total Time (No Relax) |
-|---------|----------|----------------|-----------------------|
-| **Short** (2Q2K) | 73 | **9.7s** | ~19s |
-| **Medium** (6KWC) | 185 | **35.0s** | ~45s |
-
-### 2. Relaxation Impact
-Relaxation (Amber minimization) is GPU-accelerated via a custom OpenMM build for Blackwell.
-
-| Mode | Inference | Relaxation | Total Time |
-|------|-----------|------------|------------|
-| No Relax | 35.0s | - | 45s |
-| **Relaxed** | **35.2s** | **5.8s** | **51s** |
+### Benchmark Results
+| Example | Mode | Inference | Relaxation | Total Time |
+|---------|------|-----------|------------|------------|
+| **Short (73)** | No Relax | 9.7s | - | 19s |
+| **Short (73)** | **Relaxed** | **9.8s** | **4.6s** | **24s** |
+| **Medium (185)**| No Relax | 35.0s | - | 45s |
+| **Medium (185)**| **Relaxed** | **35.2s** | **5.8s** | **51s** |
 
 > **Note**: Total time includes Docker container startup, model loading, and template downloading. For batch processing, consider keeping the container running to amortize startup costs.
 
