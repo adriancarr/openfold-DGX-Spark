@@ -129,6 +129,14 @@ RUN mkdir -p /root/.triton/autotune
 RUN bash /opt/openfold/scripts/download_openfold_params.sh /opt/openfold
 
 # -----------------------------------------------------------------------------
+# Example Templates
+# -----------------------------------------------------------------------------
+# Download mmCIF templates required for the monomer example (6KWC)
+# This allows the example to run out-of-the-box without mounting external templates
+COPY scripts/download_example_templates.sh /opt/openfold/scripts/
+RUN bash /opt/openfold/scripts/download_example_templates.sh
+
+# -----------------------------------------------------------------------------
 # Validation & Runtime
 # -----------------------------------------------------------------------------
 # Create a test to verify all imports work

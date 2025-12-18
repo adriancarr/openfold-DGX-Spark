@@ -35,7 +35,7 @@ docker run --gpus all --ipc=host --shm-size=64g \
     openfold-spark:latest \
     python3 run_pretrained_openfold.py \
     /opt/openfold/examples/monomer/fasta_dir \
-    /path/to/template_mmcif \
+    /opt/openfold/examples/monomer/template_mmcif \
     --output_dir /output \
     --openfold_checkpoint_path /opt/openfold/openfold_params/finetuning_ptm_2.pt \
     --config_preset model_1_ptm \
@@ -61,7 +61,8 @@ Benchmarks run on **NVIDIA DGX Spark** (Grace Blackwell GB10, 20 CPU cores, 119G
 
 | Example | Residues | Inference Time | Total Time |
 |---------|----------|----------------|------------|
-| 6KWC (monomer) | 185 | **35 seconds** | 44 seconds |
+| **Short** (2Q2K) | 73 | **9.7 seconds** | ~19 seconds |
+| **Medium** (6KWC) | 185 | **35 seconds** | 45 seconds |
 
 > **Note**: Total time includes Docker container startup, model loading, and template downloading. For batch processing, consider keeping the container running to amortize startup costs.
 
