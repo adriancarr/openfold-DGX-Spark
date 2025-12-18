@@ -12,7 +12,7 @@ This build solves:
 - **CUDA Kernel Compatibility**: Compiles `attn_core_inplace_cuda` kernel for sm_120 (Blackwell)
 - **DeepSpeed Fixes**: Patches DeepSpeed to correctly parse sm_121 architecture
 - **Triton Compatibility**: Uses triton-nightly for Blackwell kernel support
-- **ARM64 Dependencies**: Installs OpenMM/pdbfixer via conda-forge for relaxation support
+- **OpenMM Source Build**: Builds OpenMM and PDBFixer from source for full Blackwell GPU relaxation support
 
 ## Quick Start
 
@@ -99,6 +99,8 @@ To run SoloSeq, use the **Split Workflow**:
         /embeddings
     ```
 
+    > **Tip**: Ensure your FASTA header matches the filename (e.g., `>1UBQ` inside `1UBQ.fasta`) to align with embedding output.
+
 2.  **Run Inference** (uses local embeddings):
     ```bash
     docker run --gpus all --ipc=host --shm-size=64g \
@@ -132,7 +134,7 @@ To run SoloSeq, use the **Split Workflow**:
 - **DeepSpeed**: 0.15.4 (pinned, with sm_121 patch)
 - **Model Weights**: 10 checkpoints embedded (~3.5 GB)
 - **Triton**: Nightly build for sm_121 support
-- **OpenMM**: 8.4.0 (via conda-forge, for relaxation)
+- **OpenMM**: Latest Source (Master) (Built for Blackwell relaxation)
 
 ### Key Fixes Applied
 
@@ -142,7 +144,7 @@ To run SoloSeq, use the **Split Workflow**:
 | Triton nightly | Provides sm_121 kernel support |
 | CUTLASS v3.6.0 | Required for DeepSpeed evoformer attention |
 | setup.py patch | Adds (12, 0) to compute_capabilities for `attn_core_inplace_cuda` |
-| conda openmm | ARM64-compatible OpenMM/pdbfixer installation |
+| Source OpenMM | Replaces Conda install with source build for Blackwell/ARM64 compatibility |
 
 ## Requirements
 
