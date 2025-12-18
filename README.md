@@ -60,12 +60,23 @@ Benchmarks run on **NVIDIA DGX Spark** (Grace Blackwell GB10, 20 CPU cores, 119G
 *Benchmark date: 2025-12-18*
 
 ### Benchmark Results
+**(System: DGX Spark / Blackwell GB10)**
+
+#### 1. Standard Mode (MSA-based)
 | Example | Mode | Inference | Relaxation | Total Time |
 |---------|------|-----------|------------|------------|
 | **Short (73)** | No Relax | 9.7s | - | 19s |
 | **Short (73)** | **Relaxed** | **9.8s** | **4.6s** | **24s** |
 | **Medium (185)**| No Relax | 35.0s | - | 45s |
 | **Medium (185)**| **Relaxed** | **35.2s** | **5.8s** | **51s** |
+
+#### 2. SoloSeq Mode (ESM-based)
+Uses baked-in ESM-1b embeddings. Skips MSA Search.
+
+| Example | Inference | Relaxation | Speedup vs Std |
+|---------|-----------|------------|----------------|
+| **Short** | **1.0s** | 4.6s | **~10x** |
+| **Medium**| **6.2s** | 5.3s | **~5.6x** |
 
 ---
 
